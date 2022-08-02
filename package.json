@@ -4,7 +4,8 @@
   "description": "��#\u0000 \u0000d\u0000e\u0000s\u0000a\u0000f\u0000i\u0000o\u0000s\u0000B\u0000a\u0000c\u0000k\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/MeliBuzzinello/desafiosBack/issues"
   },
-  "homepage": "https://github.com/MeliBuzzinello/desafiosBack#readme"
+  "homepage": "https://github.com/MeliBuzzinello/desafiosBack#readme",
+  "dependencies": {
+    "moment": "^2.29.4"
+  }
 }
