@@ -1,4 +1,4 @@
-const Contenedor = require('./ejercicio');
+const Contenedor = require('./contenedor');
 
 const prod1 = {
     title: 'arroz',
