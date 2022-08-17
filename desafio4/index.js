@@ -15,13 +15,38 @@ productosRouter.use(express.static( __dirname + '/public'));
 
 //rutas usando productosRouter
 
+productosRouter.get('/productos', (req , res)=>{
+    productosApi.listarAll();
+    res.send(productosApi);
+});
+
+productosRouter.get('/productos/:pos', (req , res)=>{
+    const { pos } = req.params;
+    res.send(productosApi.listar(pos));
+});
+
+productosRouter.post('/productos', (req , res)=>{
+    productosApi.guardar(req.body)
+    res.send(productosApi);
+});
+
+productosRouter.put('/productos/:pos', (req , res)=>{
+    const { pos } = req.params;
+    res.send(productosApi.actualizar(req.body, pos));
+});
+
+productosRouter.delete('/productos/:pos', (req , res)=>{
+    const { pos } = req.params;
+    const prod = JSON.stringify(productosApi.borrar(pos));
+    res.send(`Producto eliminado. Lista de productos actualizada ${prod}`);
+});
 
 
 // servidor
 
 const app = express()
 app.use(express.static('public'))
-app.use('/api/productos', productosRouter)
+app.use('/api', productosRouter)
 
 const PORT = 8080
 const server = app.listen(PORT, () => {
