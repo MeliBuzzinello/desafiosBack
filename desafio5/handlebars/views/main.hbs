@@ -1,0 +1,28 @@
+     <div class="container mt-3">
+        <!-- incrustar estilos -->
+            <div class="jumbotron">
+                <h1>Vista de Productos</h1>
+                <br>
+                <!-- el valor hayProductos deberia llegar del servidor como un flag boolean para saber si el arreglo esta vacio o lleno -->
+                {{#if listExists}}
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Foto</th>
+                            </tr>
+                            <!-- implementar foreach para cargar productos -->
+                            {{#each productosApi.productos }}
+                                <tr>
+                                    <td>{{this.title}}</td>
+                                    <td>{{this.price}}</td>
+                                    <td>{{this.thumbnail}}</td>
+                                </tr>
+                                {{/each }}
+                        </table>
+                    </div>
+                    {{/if}}
+                        <h3 class="alert alert-warning">No se encontraron productos</h3>
+                            <br>
+                            <a href="/" type="button" class="btn btn-primary">Cargar un nuevo producto</a>

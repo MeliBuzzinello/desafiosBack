@@ -1,0 +1,63 @@
+//- html 
+//-     head
+//-         title='Vista de Productos' 
+//-         link=rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+//-         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"
+//-     body
+//-         div=class="container mt-3"
+//-             div=class="jumbotron"
+//-                 h1=Vista de Productos
+//-                 br
+//-                 <% if(productosApi.productos.length > 0){ %>
+//-                     div=class="table-responsive"
+//-                         table class="table table-dark"
+//-                             tr
+//-                                 th=Nombre
+//-                                 th=Precio
+//-                                 th=Foto
+//-                             //- implementar foreach para cargar productos -->
+//-                             <% for (const produ of productosApi.productos) {%>
+//-                             tr
+//-                                 td=<%=produ.title%>
+//-                                 td=<%=produ.price%>
+//-                                 td=<%=produ.thumbnail%>
+//-                                 <%};%>
+//-                     <% } else{ %>
+//-                     h3= class="alert alert-warning" No se encontraron productos
+//-                         <% } %>
+
+//-                             br
+//-                             a href="/" type="button" class="btn btn-primary">Cargar un nuevo producto
+
+
+html 
+    head
+        title='Vista de Productos' 
+        link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css")
+    body
+        div(class="container mt-3")
+            div(class="jumbotron")
+                h1 Vista de Productos
+                br
+                if  productosApi.productos.length > 0
+                    div(class="table-responsive") 
+                        table(class="table table-dark")
+                            tr 
+                                td Nombre 
+                                td Precio
+                                td Foto
+                    each produ in productosApi.productos
+                        table(class="table")
+                            tr
+                                td=produ.title 
+                                td=produ.price 
+                                td=produ.thumbnail
+                        br        
+                    else 
+                        h3(class="alert alert-warning") No se encontraron productos
+                    br
+                a(href="/" class="btn btn-primary") Cargar un nuevo producto
+        
+
+
+
