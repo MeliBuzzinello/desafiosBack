@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/MeliBuzzinello/desafiosBack#readme",
   "dependencies": {
+    "init": "^0.1.2",
     "moment": "^2.29.4"
-  },
-  "devDependencies": {}
+  }
 }

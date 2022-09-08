@@ -16,7 +16,7 @@ productosRouter.use(express.static( __dirname + '/public'));
 //rutas usando productosRouter
 
 productosRouter.get('/productos', (req , res)=>{
-    productosApi.listarAll();
+    productosApi.listarAll(); 
     res.send(productosApi);
 });
 

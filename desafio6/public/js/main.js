@@ -10,37 +10,42 @@ formAgregarProducto.addEventListener('submit', (e) => {
         price: document.getElementById('precio').value,
         thumbnail: document.getElementById('foto').value
     };
-
-    socket.emit('new-product', producto);
-    console.log(producto)
+    socket.emit('new-product', producto );
     formAgregarProducto.reset();
 });
 
-socket.on('new-product', data => {
-    makeHtmlTable(data);
+socket.on('new-product', async listaProd => {
     //generar el html y colocarlo en el tag productos llamando al funcion makeHtmlTable
+    const html = await makeHtmlTable(listaProd);
+    document.getElementById('productos').innerHTML = html;
 });
 
-function makeHtmlTable(productos) {
-    return fetch('views/main.hbs')
+function makeHtmlTable(data) {
+    return fetch('plantillas/tabla-productos.hbs')
         .then(respuesta => respuesta.text())
-        .then(plantilla => {
-            const template = Handlebars.compile(plantilla);
-            const html = template({ productos })
+        .then(resp => {
+            const template = Handlebars.compile(resp);
+            const html = template({data})
             return html
         })
 }
 
 //-------------------------------------------------------------------------------------
 
-const inputUsername = document.getElementById('inputUsername')
-const inputMensaje = document.getElementById('inputMensaje')
-const btnEnviar = document.getElementById('btnEnviar')
+const inputUsername = document.getElementById('inputUsername').value;
+const inputMensaje = document.getElementById('inputMensaje').value;
+const btnEnviar = document.getElementById('btnEnviar');
+let date = new Date().toDateString();
 
 const formPublicarMensaje = document.getElementById('formPublicarMensaje')
 formPublicarMensaje.addEventListener('submit', e => {
     e.preventDefault()
     //Armar el objeto de mensaje y luego emitir mensaje al evento nuevoMensaje con sockets
+    const mensaje = {
+        inputUsername,
+        inputMensaje, 
+        date
+    };
     formPublicarMensaje.reset()
     inputMensaje.focus()
 })
@@ -53,6 +58,9 @@ socket.on('mensajes', mensajes => {
 
 function makeHtmlList(mensajes) {
     //Armar nuestro html para mostrar los mensajes como lo hicimos en clase
+   
+    socket.emit('new-message', mensaje);
+    return false;
 }
 
 inputUsername.addEventListener('input', () => {

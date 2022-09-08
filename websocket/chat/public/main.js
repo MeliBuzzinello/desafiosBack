@@ -12,7 +12,6 @@ function addMessage(e){
         author: document.getElementById('author').value,
         text: document.getElementById('text').value
     };
-
     socket.emit('new-message', mensaje);
     return false;
 };

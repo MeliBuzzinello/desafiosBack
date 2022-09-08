@@ -3,59 +3,34 @@ const handlebars = require('express-handlebars');
 const { Server: HttpServer } = require('http')
 const { Server: IoServer } = require('socket.io')
 
-// const ContenedorMemoria = require('../contenedores/ContenedorMemoria')
-// const ContenedorArchivos = require('../contenedores/ContenedorArchivos')
+const ContenedorMemoria = require('../contenedores/ContenedorMemoria')
+const ContenedorArchivo = require('../contenedores/ContenedorArchivo')
 
 //--------------------------------------------
 // instancio servidor, socket y api
 
-// const contenedorMemoria = new ContenedorMemoria();
-// const contenedorArchivos = new ContenedorArchivos('./producto.txt');
+const contenedorMemoria = new ContenedorMemoria();
+const contenedorArchivo = new ContenedorArchivo( './mensajes.txt');
 
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IoServer(httpServer);
 
 //--------------------------------------------
-
-app.engine(
-    'hbs', 
-    handlebars({
-        extname: '.hbs',
-        defaultLayout: 'index.hbs',
-        layoutsDir: __dirname + '/views/layouts',
-        partialsDir: __dirname + '/views/partials'
-    })
-);
-
-app.set('view engine', 'hbs'); //hbs: extensions
-app.set('views', './views');
-
-
-//--------------------------------------------
 // configuro el socket
 
 io.on('connection', socket => {
-    console.log('Nuevo cliente conectado');
     //Este evento carga el historial de mensajes cuando un nuevo cliente se conecta
-    // socket.emit('new-product', productos);
+    //socket.emit('new-product', data);
 
-    socket.on('new-product', data => {
-        // productos.push(data);
-        console.log(data)
-        //Este evento envía un nuevo mensaje a todos los clientes que estén conectado en ese momento
-        io.sockets.emit('new-product', data);
-    });
+    // escucha cliente alta de productos
+    socket.on('new-product', async  (data) => {
+        await contenedorMemoria.guardar(data);
+        const allProducts = contenedorMemoria.listarAll();
+    // le responde a todos los usuarios conectados a New items
+        io.sockets.emit('new-product', allProducts);
+  });
 });
-
-// app.post('/', (req, res) => {
-//     contenedorArchivos.guardar(req.body)
-//     res.send('contenedorArchivos');
-// });
-
-// app.get('/', (req, res)=>{
-//     res.render('tabla-productos',{ contenedorArchivos, listExists: true });
-// });
 
 
 

@@ -25,26 +25,16 @@ class ContenedorArchivo {
         try {
             const products = await fs.readFile(this.ruta , 'utf-8');
             if(products  === ''){
-                const primerProducto = [{
-                    title: obj.title,
-                    price: obj.price,
-                    thumbnail: obj.thumbnail,
-                    id: 1
-                }]
+                const primerProducto = [{id:1, ...obj}]
                 await fs.writeFile(this.ruta , JSON.stringify(primerProducto, null, 2));
-                return 1;
+                return primerProducto;
             } else {
                     const productObj = JSON.parse(products); 
                     let idMax = productObj[productObj.length -1].id +1;
-                    const produId = {
-                       title: obj.title,
-                       price: obj.price,
-                       thumbnail: obj.thumbnail,
-                       id: idMax
-                    }
+                    const produId = {id:idMax, ...obj}
                     productObj.push(produId);
                     await fs.writeFile(this.ruta , JSON.stringify(productObj, null, 2));
-                    return produId.id;
+                    return productObj;
             }
         } catch (error) {
             console.log(error)
@@ -53,7 +43,7 @@ class ContenedorArchivo {
 
     async actualizar(elem, id) {
         const products = await fs.readFile(this.ruta , 'utf-8');
-        products[parseInt(id) -1 ] = {id:id, ...prod};
+        products[parseInt(id) -1 ] = {id:id, ...elem};
         return await fs.writeFile(this.ruta , JSON.stringify(products, null, 2));
     }
 

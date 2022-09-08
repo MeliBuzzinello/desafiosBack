@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Lanzar Program",
-            "program": "${workspaceFolder}/desafio5/handlebars/main.js"
+            "program": "${workspaceFolder}/desafio6/src/main.js"
         }
     ]
 }
