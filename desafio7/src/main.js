@@ -21,13 +21,25 @@ const mensajesApi = new ContenedorSQL(config.sqlite3, 'mensajes')
 // configuro el socket
 
 io.on('connection', async socket => {
-    //Implementación
-    console.log('cliente conectado');
+    //Implementación productos
+    // solo falta q ande el cargar los datos cuando se levanta el navegador productos y mensajes
+    const allProducts = await productosApi.listarAll();
+    socket.emit('productos', allProducts);
 
-    socket.on('new-product', async  (data) => {
+    socket.on('update', async  (data) => {
         await productosApi.guardar(data);
-        const allProducts = productosApi.listarAll();
-        io.sockets.emit('new-product', allProducts);
+        const allProducts = await productosApi.listarAll();
+        io.sockets.emit('productos', allProducts);
+    })
+
+    //Implementacion mensajes
+    const allMsj = await mensajesApi.listarAll();
+    socket.emit('mensajes', allMsj);
+
+    socket.on('nuevoMensaje', async  (data) => {
+        await mensajesApi.guardar(data);
+        const allMsj = await mensajesApi.listarAll();
+        io.sockets.emit('mensajes', allMsj);
     })
 });
 

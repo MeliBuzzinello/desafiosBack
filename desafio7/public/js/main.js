@@ -14,6 +14,7 @@ formAgregarProducto.addEventListener('submit', e => {
     formAgregarProducto.reset()
 })
 
+
 socket.on('productos', productos => {
     makeHtmlTable(productos).then(html => {
         document.getElementById('productos').innerHTML = html
@@ -36,15 +37,21 @@ const inputUsername = document.getElementById('inputUsername')
 const inputMensaje = document.getElementById('inputMensaje')
 const btnEnviar = document.getElementById('btnEnviar')
 
+let today = new Date();
+
 const formPublicarMensaje = document.getElementById('formPublicarMensaje')
 formPublicarMensaje.addEventListener('submit', e => {
     e.preventDefault()
 
-    const mensaje = { autor: inputUsername.value, texto: inputMensaje.value }
+    const mensaje = { autor: inputUsername.value, 
+                      texto: inputMensaje.value,
+                      fyh: today.toLocaleString()
+     }
     socket.emit('nuevoMensaje', mensaje);
     formPublicarMensaje.reset()
     inputMensaje.focus()
 })
+
 
 socket.on('mensajes', mensajes => {
     console.log(mensajes);

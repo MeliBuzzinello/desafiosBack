@@ -12,7 +12,8 @@ export default {
             host: 'localhost',
             user: 'root',
             password: '',
-            database: 'coderhouse'
+            database: 'coderhouse',
+            port: 3306
         }
     }
 }
