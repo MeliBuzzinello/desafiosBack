@@ -1,0 +1,337 @@
+test> use ecommerce
+switched to db ecommerce
+ecommerce> db.createCollection("mensajes")
+{ ok: 1 }
+ecommerce> db.createCollection("productos")
+{ ok: 1 }
+
+-------------> Consigna 1
+------------- collections mensajes ---------------
+
+ecommerce> db.mensajes.insertMany([{autor:"meli@hotmail.com",texto:"buenas tardes"},{autor:"emi@gmail.com",texto:"soy emilia"},{autor:"anto@hotmail.com",texto:"necesito info de productos"},{autor:"agustin@gmail.com",texto:"buen dia, como estas?"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6321df8ef7319c5d7a8e9975"),
+    '1': ObjectId("6321df8ef7319c5d7a8e9976"),
+    '2': ObjectId("6321df8ef7319c5d7a8e9977"),
+    '3': ObjectId("6321df8ef7319c5d7a8e9978")
+  }
+}
+ecommerce> db.mensajes.insertOne({autor:"chris",texto:"info"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("6321e046f7319c5d7a8e9979")
+}
+
+ecommerce> db.mensajes.insertMany([{autor:"meli@hotmail.com",texto:"buenas tardes"},{autor:"emi@gmail.com",texto:"soy emilia"},{autor:"anto@hotmail.com",texto:"necesito info de productos"},{autor:"agustin@gmail.com",texto:"buen dia, como estas?"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6321e1a17c7a9cca52bba7f9"),
+    '1': ObjectId("6321e1a17c7a9cca52bba7fa"),
+    '2': ObjectId("6321e1a17c7a9cca52bba7fb"),
+    '3': ObjectId("6321e1a17c7a9cca52bba7fc")
+  }
+}
+
+ecommerce> db.mensajes.insertOne({autor:"carolina@gmail.com",texto:"informacion por favor"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("6321e2107c7a9cca52bba7fd")
+}
+
+------------- collections productos ---------------
+
+ecommerce> db.productos.insertOne({title:"arroz",price: 120,thumbnail:"https://www.recetasderechupete.com/wp-content/uploads/2019/08/Arroz-blanco-768x527.jpg"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("632224427c7a9cca52bba7fe")
+}
+ecommerce> db.productos.insertMany([{title:"arroz Ledesma",price: 1700,thumbnail:"https://www.recetasderechupete.com/wp-content/uploads/2019/08/Arroz-blanco-768x527.jpg"},{title:"fideo", price:580, thumbnail:"https://http2.mlstatic.com/D_NQ_NP_764696-MLA45793691932_052021-V.webp"},{title:"azucar",price: 900,thumbnail:"https://www.casa-segal.com/wp-content/uploads/2019/03/azucar-kilo-ledesma-reposteria-mendoza-casa-segal-1-600x600.jpg"},{title:"aceite",price:1280,thumbnail:"https://statics.dinoonline.com.ar/imagenes/large_460x460/2320513_l.jpg"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6322250c7c7a9cca52bba7ff"),
+    '1': ObjectId("6322250c7c7a9cca52bba800"),
+    '2': ObjectId("6322250c7c7a9cca52bba801"),
+    '3': ObjectId("6322250c7c7a9cca52bba802")
+  }
+}
+ecommerce> db.productos.insertMany([{title:"harina",price:2300,thumbnail:"https://carrefourar.vtexassets.com/arquivos/ids/205215-800-auto?v=637601556417500000&width=800&height=auto&aspect=true"},{title:"fideo Marolio", price:2860, thumbnail:"https://carrefourar.vtexassets.com/arquivos/ids/178800-800-auto?v=637468580346430000&width=800&height=auto&aspect=true"},{title:"yerba",price:3350,thumbnail:"https://jumboargentina.vtexassets.com/arquivos/ids/711224-800-auto?v=637938633804770000&width=800&height=auto&aspect=true"},{title:"chocolate",price:4320,thumbnail:"https://www.clarin.com/img/2022/06/16/NZ6sQJlRZ_1256x620__1.jpg"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("632226467c7a9cca52bba803"),
+    '1': ObjectId("632226467c7a9cca52bba804"),
+    '2': ObjectId("632226467c7a9cca52bba805"),
+    '3': ObjectId("632226467c7a9cca52bba806")
+  }
+}
+ecommerce> db.productos.insertOne({title:"gaseosa",price:4990,thumbnail:"https://jumboargentina.vtexassets.com/arquivos/ids/666397-800-auto?v=637674141828470000&width=800&height=auto&aspect=true"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("632226c27c7a9cca52bba807")
+}
+
+
+-------------> Consigna 3
+
+ecommerce> db.mensajes.find()
+[
+  {
+    _id: ObjectId("6321df8ef7319c5d7a8e9975"),
+    autor: 'meli@hotmail.com',
+    texto: 'buenas tardes'
+  },
+  {
+    _id: ObjectId("6321df8ef7319c5d7a8e9976"),
+    autor: 'emi@gmail.com',
+    texto: 'soy emilia'
+  },
+  {
+    _id: ObjectId("6321df8ef7319c5d7a8e9977"),
+    autor: 'anto@hotmail.com',
+    texto: 'necesito info de productos'
+  },
+  {
+    _id: ObjectId("6321df8ef7319c5d7a8e9978"),
+    autor: 'agustin@gmail.com',
+    texto: 'buen dia, como estas?'
+  },
+  {
+    _id: ObjectId("6321e046f7319c5d7a8e9979"),
+    autor: 'chris',
+    texto: 'info'
+  },
+  {
+    _id: ObjectId("6321e1a17c7a9cca52bba7f9"),
+    autor: 'meli@hotmail.com',
+    texto: 'buenas tardes'
+  },
+  {
+    _id: ObjectId("6321e1a17c7a9cca52bba7fa"),
+    autor: 'emi@gmail.com',
+    texto: 'soy emilia'
+  },
+  {
+    _id: ObjectId("6321e1a17c7a9cca52bba7fb"),
+    autor: 'anto@hotmail.com',
+    texto: 'necesito info de productos'
+  },
+  {
+    _id: ObjectId("6321e1a17c7a9cca52bba7fc"),
+    autor: 'agustin@gmail.com',
+    texto: 'buen dia, como estas?'
+  },
+  {
+    _id: ObjectId("6321e2107c7a9cca52bba7fd"),
+    autor: 'carolina@gmail.com',
+    texto: 'informacion por favor'
+  }
+]
+
+ecommerce> db.productos.find()
+[
+  {
+    _id: ObjectId("632224427c7a9cca52bba7fe"),
+    title: 'arroz',
+    price: 120,
+    thumbnail: 'https://www.recetasderechupete.com/wp-content/uploads/2019/08/Arroz-blanco-768x527.jpg'
+  },
+  {
+    _id: ObjectId("6322250c7c7a9cca52bba7ff"),
+    title: 'arroz Ledesma',
+    price: 1700,
+    thumbnail: 'https://www.recetasderechupete.com/wp-content/uploads/2019/08/Arroz-blanco-768x527.jpg'
+  },
+  {
+    _id: ObjectId("6322250c7c7a9cca52bba800"),
+    title: 'fideo',
+    price: 580,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_764696-MLA45793691932_052021-V.webp'
+  },
+  {
+    _id: ObjectId("6322250c7c7a9cca52bba801"),
+    title: 'azucar',
+    price: 900,
+    thumbnail: 'https://www.casa-segal.com/wp-content/uploads/2019/03/azucar-kilo-ledesma-reposteria-mendoza-casa-segal-1-600x600.jpg'
+  },
+  {
+    _id: ObjectId("6322250c7c7a9cca52bba802"),
+    title: 'aceite',
+    price: 1280,
+    thumbnail: 'https://statics.dinoonline.com.ar/imagenes/large_460x460/2320513_l.jpg'
+  },
+  {
+    _id: ObjectId("632226467c7a9cca52bba803"),
+    title: 'harina',
+    price: 2300,
+    thumbnail: 'https://carrefourar.vtexassets.com/arquivos/ids/205215-800-auto?v=637601556417500000&width=800&height=auto&aspect=true'
+  },
+  {
+    _id: ObjectId("632226467c7a9cca52bba804"),
+    title: 'fideo Marolio',
+    price: 2860,
+    thumbnail: 'https://carrefourar.vtexassets.com/arquivos/ids/178800-800-auto?v=637468580346430000&width=800&height=auto&aspect=true'
+  },
+  {
+    _id: ObjectId("632226467c7a9cca52bba805"),
+    title: 'yerba',
+    price: 3350,
+    thumbnail: 'https://jumboargentina.vtexassets.com/arquivos/ids/711224-800-auto?v=637938633804770000&width=800&height=auto&aspect=true'
+  },
+  {
+    _id: ObjectId("632226467c7a9cca52bba806"),
+    title: 'chocolate',
+    price: 4320,
+    thumbnail: 'https://www.clarin.com/img/2022/06/16/NZ6sQJlRZ_1256x620__1.jpg'
+  },
+  {
+    _id: ObjectId("632226c27c7a9cca52bba807"),
+    title: 'gaseosa',
+    price: 4990,
+    thumbnail: 'https://jumboargentina.vtexassets.com/arquivos/ids/666397-800-auto?v=637674141828470000&width=800&height=auto&aspect=true'
+  }
+]
+
+-------------> Consigna 4
+
+ecommerce> db.mensajes.countDocuments()
+10
+ecommerce> db.productos.countDocuments()
+10
+
+
+-------------> Consigna 5
+-------------> a)
+
+ecommerce> db.productos.insertOne({title:"jugo",price:220,thumbnail:"https://jumboargentina.vtexassets.com/arquivos/ids/666397-800-auto?v=637674141828470000&width=800&height=auto&aspect=true"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("63222b596d0b2e05febcb8c4")
+}
+
+-------------> b)
+ecommerce> db.productos.find({"price":{$lt:1000}})
+[
+  {
+    _id: ObjectId("632224427c7a9cca52bba7fe"),
+    title: 'arroz',
+    price: 120,
+    thumbnail: 'https://www.recetasderechupete.com/wp-content/uploads/2019/08/Arroz-blanco-768x527.jpg'
+  },
+  {
+    _id: ObjectId("6322250c7c7a9cca52bba800"),
+    title: 'fideo',
+    price: 580,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_764696-MLA45793691932_052021-V.webp'
+  },
+  {
+    _id: ObjectId("6322250c7c7a9cca52bba801"),
+    title: 'azucar',
+    price: 900,
+    thumbnail: 'https://www.casa-segal.com/wp-content/uploads/2019/03/azucar-kilo-ledesma-reposteria-mendoza-casa-segal-1-600x600.jpg'
+  },
+  {
+    _id: ObjectId("63222b596d0b2e05febcb8c4"),
+    title: 'jugo',
+    price: 220,
+    thumbnail: 'https://jumboargentina.vtexassets.com/arquivos/ids/666397-800-auto?v=637674141828470000&width=800&height=auto&aspect=true'
+  }
+]
+
+---------------------
+
+db.productos.find({$and:[{"price":{$gt:1000}},{"price":{$lt:3000}}]})
+ecommerce>
+[
+  {
+    _id: ObjectId("6322250c7c7a9cca52bba7ff"),
+    title: 'arroz Ledesma',
+    price: 1700,
+    thumbnail: 'https://www.recetasderechupete.com/wp-content/uploads/2019/08/Arroz-blanco-768x527.jpg'
+  },
+  {
+    _id: ObjectId("6322250c7c7a9cca52bba802"),
+    title: 'aceite',
+    price: 1280,
+    thumbnail: 'https://statics.dinoonline.com.ar/imagenes/large_460x460/2320513_l.jpg'
+  },
+  {
+    _id: ObjectId("632226467c7a9cca52bba803"),
+    title: 'harina',
+    price: 2300,
+    thumbnail: 'https://carrefourar.vtexassets.com/arquivos/ids/205215-800-auto?v=637601556417500000&width=800&height=auto&aspect=true'
+  },
+  {
+    _id: ObjectId("632226467c7a9cca52bba804"),
+    title: 'fideo Marolio',
+    price: 2860,
+    thumbnail: 'https://carrefourar.vtexassets.com/arquivos/ids/178800-800-auto?v=637468580346430000&width=800&height=auto&aspect=true'
+  }
+]
+
+----------------------------
+
+ecommerce> db.productos.find({"price":{$gt:3000}})
+[
+  {
+    _id: ObjectId("632226467c7a9cca52bba805"),
+    title: 'yerba',
+    price: 3350,
+    thumbnail: 'https://jumboargentina.vtexassets.com/arquivos/ids/711224-800-auto?v=637938633804770000&width=800&height=auto&aspect=true'
+  },
+  {
+    _id: ObjectId("632226467c7a9cca52bba806"),
+    title: 'chocolate',
+    price: 4320,
+    thumbnail: 'https://www.clarin.com/img/2022/06/16/NZ6sQJlRZ_1256x620__1.jpg'
+  },
+  {
+    _id: ObjectId("632226c27c7a9cca52bba807"),
+    title: 'gaseosa',
+    price: 4990,
+    thumbnail: 'https://jumboargentina.vtexassets.com/arquivos/ids/666397-800-auto?v=637674141828470000&width=800&height=auto&aspect=true'
+  }
+]
+
+-----------------------
+
+ecommerce> db.productos.find({},{"title":1, _id:0}).sort().limit(1).skip(2)
+[ { title: 'fideo' } ]
+
+----------------------
+
+ecommerce> db.productos.updateMany({},{$set:{stock:100}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 11,
+  modifiedCount: 10,
+  upsertedCount: 0
+}
+
+-----------------------
+
+ecommerce> db.productos.updateMany({"price":{$gt:4000}},{$set:{stock:0}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+
+----------------------
+
+ecommerce> db.productos.deleteMany({"price":{$lt:1000}})
+{ acknowledged: true, deletedCount: 4 }
+
+
+
+
+
+-------------> Consigna 6
+
+db.createUser({"user": "pepe", "pwd": "asd456", "roles": [{ "role": "read", "db": "ecommerce"}]})
