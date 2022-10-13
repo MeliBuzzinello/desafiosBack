@@ -27,9 +27,7 @@ const routerPersonas = new Router();
 
 routerPersonas.use(express.json());
 routerPersonas.use(express.urlencoded({ extended: true }));
-
 const personas = [];
-
 routerPersonas.get('/personas', (req, res)=>{
     res.send(personas);
 });

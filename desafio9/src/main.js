@@ -79,7 +79,9 @@ io.on('connection', async socket => {
 
     //Implementacion mensajes
     const allMsj = await mensajesApi.listarAll();
-    const normalizrData = normalize(allMsj, messageSchema);
+    const allMsjJson = JSON.parse(allMsj)
+
+    const normalizrData = normalize(allMsjJson, messageSchema);
     print(normalizrData)
     socket.emit('mensajes', print(normalizrData));
 

@@ -5,6 +5,7 @@ export const options = {
         user: 'root',
         password: '',
         database: 'ecommerce',
-        port: 3310
+        port: 3306
     }
 }
+
