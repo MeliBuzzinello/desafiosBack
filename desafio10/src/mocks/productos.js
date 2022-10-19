@@ -21,7 +21,4 @@ function createNFakeProducts(n) {
     
 // }
 
-export {
-    createFakeProduct,
-    createNFakeProducts
-}
+export default createNFakeProducts;
