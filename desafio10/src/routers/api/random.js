@@ -4,7 +4,7 @@ import { fork } from 'child_process';
 const randomRouter = new Router();
 
 randomRouter.get('/', (req, res) => {
-  const computo = fork('src/routers/api/sumaFork.js');
+  const computo = fork('./src/routers/api/sumaFork.js');
   computo.send('start');
   computo.on('message', numRandoms => {
       res.end(numRandoms);

@@ -27,26 +27,26 @@ const io = new Socket(httpServer)
 //--------------------------------------------
 // configuro el socket
 
-// io.on('connection', async socket => {
-//   const productos = await productosApi.listarAll();
-//   io.sockets.emit("productos", productos);
-//   const msgData = await mensajesApi.getAll();
-//   const mensajes = processMsgData(msgData);
-//   io.sockets.emit("mensajes", mensajes);
+io.on('connection', async socket => {
+  const productos = await productosApi.listarAll();
+  io.sockets.emit("productos", productos);
+  const msgData = await mensajesApi.getAll();
+  const mensajes = processMsgData(msgData);
+  io.sockets.emit("mensajes", mensajes);
 
-//   console.log("Nueva conexion");
-//   socket.on("newProduct", async (data) => {
-//     await productosApi.guardar(data);
-//     const productos = await productosApi.listarAll();
-//     io.sockets.emit("productos", productos);
-//   });
-//   socket.on("newMessage", async (data) => {
-//     await mensajesApi.createNew(data);
-//     const msgData = await mensajesApi.getAll();
-//     const mensajes = processMsgData(msgData);
-//     io.sockets.emit("mensajes", mensajes);
-//   });
-// });
+  console.log("Nueva conexion");
+  socket.on("newProduct", async (data) => {
+    await productosApi.guardar(data);
+    const productos = await productosApi.listarAll();
+    io.sockets.emit("productos", productos);
+  });
+  socket.on("newMessage", async (data) => {
+    await mensajesApi.createNew(data);
+    const msgData = await mensajesApi.getAll();
+    const mensajes = processMsgData(msgData);
+    io.sockets.emit("mensajes", mensajes);
+  });
+});
 
 //--------------------------------------------
 // configuro el servidor
