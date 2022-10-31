@@ -1,4 +1,6 @@
 import { Router } from 'express'
+import os from "os";
+const numCpu = os.cpus().length;
 
 const infoRouter = new Router()
 
@@ -11,7 +13,9 @@ infoRouter.get('/', (req, res) => {
          Memoria total reservada(rss): ${process.memoryUsage()},
          Path de ejecucion: ${process.StartInfo},
          Process Id: ${process.pid},
-         Carpeta del proyecto: ${process.cwd()}`
+         Carpeta del proyecto: ${process.cwd()},
+         Cantidad de procesadores: ${numCpu}`
+
      )
 })
 
