@@ -25,7 +25,7 @@ import cluster from "cluster";
 const parameter = parseInt(process.argv[3]);
 
 if (parameter === 'CLUSTER') {
-  if (cluster.isMaster) {
+  if (cluster.isPrimary) {
     console.log(`PID MASTER ${process.pid}`);
 
     for (let i = 0; i < numCpu; i++) {
